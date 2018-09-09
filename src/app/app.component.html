@@ -1,0 +1,49 @@
+
+    <!-- <div
+    ng2-carouselamos
+    [width]="500"
+    [items]="listOfItems"
+    [$item]="itemTemplate"
+    [$prev]="prevTemplate"
+    [$next]="nextTemplate"
+    (onSelectedItem)="selectedItem = $event.item; selectedIndex = $event.index"
+  ></div>
+   
+  <div>
+    Current item selected
+  </div>
+   
+  <ng-template #prevTemplate>
+    <img src="assets/person.png" />
+  </ng-template>
+   
+  <ng-template #nextTemplate>
+    <img src="assets/gamethrones.jpg" />
+  </ng-template>
+   
+  <ng-template let-item let-i="index" #itemTemplate>
+    <div style="min-width: 200px">
+      <b *ngIf="i === selectedIndex">{{i}}. {{item.name}}</b>
+      <span *ngIf="i !== selectedIndex">{{i}}. {{item.name}}</span>
+    </div>
+  </ng-template>--> 
+  
+    <div class="container1">
+      <img src="../assets/gamethrones.jpg" class="img-fluid">
+   
+    </div> 
+
+<router-outlet></router-outlet>
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="footer">
+	<div class="container">
+		<p>Created By <b class="text-primary">Priy Singh@ 2018</b></p>
+	</div>
+</div>

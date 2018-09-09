@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-12 text-center">
+        <hr class="small">
+      <p class="btn btn-success btn-md">Search</p>
+
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-4">
+      <form #myForm="ngForm">
+        <div class="form-group">
+          <label id="label-set">Choose Order:</label>
+          <select [(ngModel)]="inputValue" name="inputVal" class="form-control">
+            <option value="ascending" [selected]>Ascending</option>
+            <option value="descending">Descending</option>
+
+          </select>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-4">
+      <form #myForm="ngForm">
+        <div class="form-group">
+          <label id="label-set">Choose Category:</label>
+          <select [(ngModel)]="categoryValue" name="category" class="form-control">
+            <option value="Select" [selected]>Select</option>
+            <option value="characters">Characters</option>
+
+            <option value="books">Books</option>
+            <option value="houses">Houses</option>
+
+          </select>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-4">
+      <form #myForm="ngForm">
+        <div class="form-group">
+          <label id="label-set">Filter by Name:</label>
+          <input type="text" name="textVal" [(ngModel)]="textValue" class="form-control">
+        </div>
+      </form>
+
+    </div>
+  </div>
+ <div class="row">
+
+    <div *ngFor="let single of final | sortingpipes:[inputValue,categoryValue,textValue] |  paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+      id="set">
+      <div *ngIf="single.url.search('books')>-1">
+        <div class="col-lg-12 mb-4">
+          <div class="card ">
+            <img class="card-img-top" src="assets/book.jpeg" style="width:228px;height:228px" alt="Card image">
+            <div class="card-body bg-success">
+              <p class="card-title color-adjust">{{capital(single.name)}}</p>
+
+              <a [routerLink]="['/detail','books',getId(single.url)]" class="btn btn-secondary">See More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="single.url.search('characters')>-1">
+        <div class="col-lg-12 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="assets/person.png" style="width:228px;height:228px" alt="Card image">
+            <div class="card-body bg-info">
+
+              <p class="card-title color-adjust">{{capital(single.name)}}</p>
+
+              <a [routerLink]="['/detail','characters',getId(single.url)]" class="btn btn-success">See More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="single.url.search('houses')>-1">
+        <div class="col-lg-12 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="assets/houses.svg" style="width:228px;height:228px" alt="Card image">
+            <div class="card-body bg-danger">
+              <p class="card-title color-adjust">{{capital(single.name)}}</p>
+
+              <a [routerLink]="['/detail','houses',getId(single.url)]" class="btn btn-primary">See More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="text-center mt-5">
+    <pagination-controls (pageChange)="p = $event" autoHide="true" previousLabel="Go Back" nextLabel="Go Ahead"></pagination-controls>
+  </div>
+</div> 
